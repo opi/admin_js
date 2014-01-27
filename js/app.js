@@ -494,6 +494,19 @@ app = Sammy('#main', function (sam) {
             c.redirect('#/apps/'+ c.params['app']);
         }
     });
+
+
+    /**
+     * Firewall
+     *
+     */
+
+    sam.get('#/firewall', function (c) {
+        c.api('/firewall/list', function(data) { // http://api.yunohost.org/#!/firewall/firewall_list_get_3
+            c.view('firewall_list', data);
+        });
+    });
+
 });
 
 
