@@ -470,7 +470,16 @@ app = Sammy('#main', function (sam) {
 
     sam.get('#/apps/install/:app', function (c) {
         c.api('/apps?raw=true', function(data) { // http://api.yunohost.org/#!/app/app_list_get_8
-            c.view('app_install', data[c.params['app']]);
+            appData = data[c.params['app']];
+            $.each(appData.manifest.arguments.install, function(k, v) {
+                if (v.name == 'domain') {
+                    appData.manifest.arguments.install[k].allowedValues = [
+                        'domain1',
+                        'domain2',
+                    ]
+                }
+            });
+            c.view('app_install', appData);
         });
     });
 

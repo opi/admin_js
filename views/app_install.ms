@@ -37,7 +37,10 @@
         <div class="form-group">
             <label for="{{name}}" class="col-sm-12">{{ask.en}}</label>
             <div class="col-sm-12">
-                <input type="text" name="{{name}}" class="form-control" value="{{default}}" placeholder="{{example}}" required>
+                <input type="text" list="list-{{name}}" name="{{name}}" class="form-control" value="{{default}}" placeholder="{{example}}" required>
+                <datalist id="list-{{name}}">
+                {{#allowedValues}}<option value="{{.}}" />{{/allowedValues}}
+                </datalist>
             </div>
         </div>
         {{/manifest.arguments.install}}
